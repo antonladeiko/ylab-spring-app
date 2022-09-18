@@ -11,10 +11,11 @@ import java.util.UUID;
 public class Storage<T extends Essence> {
 
     private final Map<Long, T> essences = new HashMap<>();
-    public void save(T t){
+    public T save(T t){
         long id = generateUniqueID();
         t.setId(id);
         essences.put(id, t);
+        return t;
     }
 
     public T update(Long id, T essence){
