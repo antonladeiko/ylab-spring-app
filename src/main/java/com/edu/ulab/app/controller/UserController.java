@@ -1,4 +1,4 @@
-package com.edu.ulab.app.web;
+package com.edu.ulab.app.controller;
 
 import com.edu.ulab.app.facade.UserDataFacade;
 import com.edu.ulab.app.web.constant.WebConstant;
