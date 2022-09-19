@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -36,10 +37,9 @@ public class Storage<T extends Essence> {
         return essences;
     }
 
-    public T get(Long id){
-        return essences.get(id);
+    public Optional<T> get(Long id){
+        return Optional.ofNullable(essences.get(id));
     }
-
 
     private long generateUniqueID(){
         return UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;

@@ -2,6 +2,7 @@ package com.edu.ulab.app.service.impl;
 
 import com.edu.ulab.app.dto.UserDto;
 import com.edu.ulab.app.entity.User;
+import com.edu.ulab.app.exception.NotFoundException;
 import com.edu.ulab.app.mapper.UserMapper;
 import com.edu.ulab.app.service.UserService;
 import com.edu.ulab.app.storage.UserStorage;
@@ -46,13 +47,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Long id) {
-        User user = userStorage.get(id);
+        User user = userStorage.get(id)
+                .orElseThrow(() -> new NotFoundException("User with id: " + id + " not found"));
         return userMapper.userToUserDto(user);
     }
 
     @Override
     public void deleteUserById(Long id) {
         userStorage.remove(id);
+    }
+
+    public List<Long> booksIdList(UserDto userDto){
+        User user = userStorage.get(userDto.getId())
+                .orElseThrow(() -> new NotFoundException("Fuck!"));
+        return user.getBookList();
     }
 
 

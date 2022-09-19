@@ -16,4 +16,6 @@ public interface UserService {
     List<UserDto> getAllUsers();
 
     void deleteAllUsers();
+
+    List<Long> booksIdList(UserDto userDto);
 }
