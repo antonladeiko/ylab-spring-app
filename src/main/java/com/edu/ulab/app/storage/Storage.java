@@ -19,8 +19,13 @@ public class Storage<T extends Essence> {
     }
 
     public T update(Long id, T essence){
+        essence.setId(id);
         essences.put(id, essence);
         return essences.get(id);
+    }
+
+    public void removeAll(){
+        essences.clear();
     }
 
     public void remove(Long id){

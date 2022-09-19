@@ -13,5 +13,9 @@ public class User extends Essence{
 
     private int age;
 
-    private List<Book> bookList;
+    private List<Long> bookList;
+
+    public void addBook(Long id){
+        bookList.add(id);
+    }
 }

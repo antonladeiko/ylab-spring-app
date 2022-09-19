@@ -5,10 +5,13 @@ import com.edu.ulab.app.entity.User;
 import com.edu.ulab.app.mapper.UserMapper;
 import com.edu.ulab.app.service.UserService;
 import com.edu.ulab.app.storage.UserStorage;
-import com.edu.ulab.app.web.request.UserRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -28,6 +31,18 @@ public class UserServiceImpl implements UserService {
         User user = userStorage.update(id, userMapper.userDtoToUser(userDto));
         return userMapper.userToUserDto(user);
     }
+    @Override
+    public List<UserDto> getAllUsers(){
+        Collection<User> users = userStorage.getAll().values();
+        return users.stream()
+                .filter(Objects::nonNull)
+                .map(userMapper::userToUserDto)
+                .toList();
+    }
+    @Override
+    public void deleteAllUsers(){
+        userStorage.removeAll();
+    }
 
     @Override
     public UserDto getUserById(Long id) {
@@ -39,4 +54,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(Long id) {
         userStorage.remove(id);
     }
+
+
 }
